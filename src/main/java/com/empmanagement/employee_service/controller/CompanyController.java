@@ -24,18 +24,8 @@ public class CompanyController {
     }
 
     @PostMapping("/company")           //FOR POSTING THE COMPANY
-    public void addProduct(@RequestParam(required = true) String email, @RequestParam(required = true) String password, @RequestBody Company comp)
-    {
-
-        LoginRequest request = new LoginRequest();
-        request.setEmail(email);
-        request.setPassword(password);
-        if(userService.verifyUserDetails(request)){
-            service.addCompany(comp);
-        }else {
-            throw new RuntimeException("not authenticated 401");
-        }
-
+    public void addProduct(@RequestBody Company comp) {
+        service.addCompany(comp);
     }
 
     @PutMapping("/company")
