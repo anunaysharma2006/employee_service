@@ -2,6 +2,7 @@ package com.empmanagement.employee_service.controller;
 
 import com.empmanagement.employee_service.model.Address;
 import com.empmanagement.employee_service.service.AddressService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 @RestController
 public class AddressController {
 
+    @Autowired
     AddressService service;
 
     @GetMapping("/address")           //FOR SEEING ALL THE COMPANY
@@ -16,9 +18,9 @@ public class AddressController {
         return  service.getProducts(name);
     }
     @PostMapping("/address")           //FOR POSTING THE COMPANY
-    public void addProduct(@RequestBody Address addr){
+    public void addAddress(@RequestBody Address addr){
 
-        service.addCompany(addr);
+        service.addAddress(addr);
     }
 
     @PutMapping("/address")

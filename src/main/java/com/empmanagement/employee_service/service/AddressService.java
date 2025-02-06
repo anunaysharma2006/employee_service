@@ -20,7 +20,7 @@ public class AddressService {
     }
 
 
-    public void addCompany(Address addr) {
+    public void addAddress(Address addr) {
             repo.save(addr);
 
     }
