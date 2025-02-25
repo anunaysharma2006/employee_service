@@ -19,10 +19,10 @@ public class Employee {
 
 
     @ManyToOne
-    @JoinColumn(name = "company_id") // Foreign key column in Employee table
+    @JoinColumn(name = "company_id")
     private Company company;
     @ManyToOne
-    @JoinColumn(name = "address_zip") // Foreign key column in Employee table
+    @JoinColumn(name = "address_zip")
     private Address address;
 
     public Employee() {}

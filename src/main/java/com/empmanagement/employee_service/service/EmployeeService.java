@@ -14,7 +14,6 @@ public class EmployeeService {
     EmployeeRepo repo;
 
     public List<Employee> getProducts(String name) {
-
         List<Employee> all = repo.findAll();
         return all;
     }
@@ -28,9 +27,9 @@ public class EmployeeService {
         repo.save(emp);
     }
 
-    public void deleteProduct(int employeeId){
+    public void deleteProduct(int employeeId) {
         Employee employee = repo.findById(employeeId).orElse(null);
-        if(employee!=null){
+        if (employee != null) {
             repo.delete(employee);
         }
     }
@@ -40,17 +39,4 @@ public class EmployeeService {
         return employee;
 
     }
-//        Company company;
-
-//    public void getEmployeeDetails(int employeeId) {
-//        Employee employee = repo.findById(employeeId).orElse(null);
-//        int companyId=employeeId;
-//        Company company = repo.findById(companyId).orElse(null);
-//        if(employee!=null){
-//            System.out.println("haha");
-//        }
-
-
-
-
 }

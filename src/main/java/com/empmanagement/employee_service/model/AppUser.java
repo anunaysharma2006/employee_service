@@ -2,11 +2,11 @@ package com.empmanagement.employee_service.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+@Data
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 public class AppUser {
 
@@ -15,51 +15,16 @@ public class AppUser {
     private int userId;
     @Column(unique = true, nullable = false)
     private String email;
-    private String firstName;
-    private String lastName;
+    @Column(unique = true, nullable = false)
+    private String username;
     private String password;
+    private String roles;
 
-    public int getUserId() {
-        return userId;
-    }
+    public AppUser(String email, String username, String password, String roles) {
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
+        this.username = username;
         this.password = password;
+        this.roles = roles;
     }
-
-
 }
-
-

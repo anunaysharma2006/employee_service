@@ -2,9 +2,13 @@ package com.empmanagement.employee_service.service;
 
 import com.empmanagement.employee_service.dto.LoginRequest;
 import com.empmanagement.employee_service.model.AppUser;
-import com.empmanagement.employee_service.model.Token;
 import com.empmanagement.employee_service.repository.UserRepo;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,45 +18,56 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    UserRepo repo;
+    private UserRepo repo;
+
     @Autowired
-    TokenService tokenService;
+    private AuthenticationManager authManager;
 
-    public List<AppUser> getUser(String email) {
+    @Autowired
+    JWTService jwtService;
 
-        List<AppUser> all = repo.findAll();
-        return all;
+    public List<AppUser> getAllUsers() {
+        return repo.findAll();
     }
-
 
     public AppUser addUser(AppUser appUser) {
         return repo.save(appUser);
     }
 
     public void updateUser(AppUser appUser) {
-
         repo.save(appUser);
     }
 
-    public void deleteUser(Integer id){
-        AppUser appUser = repo.findById(id).orElse(null);
-        if(appUser!=null){
-            repo.delete(appUser);
-        }
+    public void deleteUser(Integer id) {
+        Optional<AppUser> appUser = repo.findById(id);
+        appUser.ifPresent(repo::delete);
     }
 
-    public AppUser getUserDetails(String email) {
-        AppUser appUser = repo.findByEmail(email).orElse(null);
-        return appUser;
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+
+    public AppUser register(AppUser users) {
+        users.setPassword(encoder.encode(users.getPassword()));
+        return repo.save(users);
 
     }
 
     public String verifyUserDetails(LoginRequest request) {
-        Optional<AppUser> optionalUser = repo.findByEmailAndPassword(request.getEmail(), request.getPassword());
-        if (optionalUser.isPresent()) {
-            Token token = tokenService.generateToken();
-            return token.getToken();
+        Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+        if (authentication.isAuthenticated()) {
+            return jwtService.generateToken(request.getUsername());
+        } else {
+            return "Fail";
         }
-        throw new RuntimeException("Invalid creds 401");
+    }
+
+    @PostConstruct
+    void createTestUserInDB() {
+        AppUser user1 = new AppUser("test1", "test1", "test1", "user");
+
+        AppUser user3 = new AppUser("user1", "test2", "ROLE_USER", "user");
+
+        register(user1);
+
+        register(user3);
     }
 }

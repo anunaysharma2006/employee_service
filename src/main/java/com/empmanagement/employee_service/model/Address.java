@@ -15,11 +15,6 @@ public class Address {
     private String State;
     private String City;
 
-//    public Address(){}
-
-//
-
-
     public String getState() {
         return State;
     }

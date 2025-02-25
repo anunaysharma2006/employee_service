@@ -18,24 +18,24 @@ public class EmployeeContoller {
 //    }
 
     @PostMapping           //FOR POSTING THE COMPANY
-    public void addProduct(@RequestBody Employee emp){
+    public void addProduct(@RequestBody Employee emp) {
         service.addCompany(emp);
     }
 
     @PutMapping
-    public void updateProduct(@RequestBody Employee emp){
+    public void updateProduct(@RequestBody Employee emp) {
 
         service.updateCompany(emp);
 
     }
 
     @DeleteMapping("/{employeeId}")
-    public void deleteProduct(@PathVariable int employeeId){
+    public void deleteProduct(@PathVariable int employeeId) {
         service.deleteProduct(employeeId);
     }
 
     @GetMapping("/{employeeId}")
-    public Employee getEmployeeDetails(@PathVariable int employeeId){
+    public Employee getEmployeeDetails(@PathVariable int employeeId) {
         return service.getEmployeeDetails(employeeId);
     }
 

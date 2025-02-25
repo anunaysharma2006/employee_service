@@ -1,12 +1,10 @@
 package com.empmanagement.employee_service.controller;
 
-import com.empmanagement.employee_service.dto.LoginRequest;
 import com.empmanagement.employee_service.model.Company;
 import com.empmanagement.employee_service.service.CompanyService;
 import com.empmanagement.employee_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 

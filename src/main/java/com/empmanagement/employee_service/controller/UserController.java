@@ -28,13 +28,8 @@ public class UserController {
     public void deleteUser(@PathVariable Integer id){
         service.deleteUser(id);
     }
-
-    @GetMapping("/{email}")
-    public AppUser getUserDetails(@PathVariable String email){
-
-        return service.getUserDetails(email);
+    @PostMapping("/register")
+    public AppUser register(@RequestBody AppUser users){
+        return service.register(users);
     }
-
-
-
 }

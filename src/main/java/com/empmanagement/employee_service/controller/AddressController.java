@@ -14,24 +14,25 @@ public class AddressController {
     AddressService service;
 
     @GetMapping("/address")           //FOR SEEING ALL THE COMPANY
-    public List<Address> getProduct(@RequestParam(required = false) String name){
-        return  service.getProducts(name);
+    public List<Address> getProduct(@RequestParam(required = false) String name) {
+        return service.getProducts(name);
     }
+
     @PostMapping("/address")           //FOR POSTING THE COMPANY
-    public void addAddress(@RequestBody Address addr){
+    public void addAddress(@RequestBody Address addr) {
 
         service.addAddress(addr);
     }
 
     @PutMapping("/address")
-    public void updateProduct(@RequestBody Address addr){
+    public void updateProduct(@RequestBody Address addr) {
 
         service.updateCompany(addr);
 
     }
 
     @DeleteMapping("/address/{Zip}")
-    public void deleteProduct(@PathVariable int Zip){
+    public void deleteProduct(@PathVariable int Zip) {
         service.deleteProduct(Zip);
     }
 }
