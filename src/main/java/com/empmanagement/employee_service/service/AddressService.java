@@ -1,7 +1,9 @@
 package com.empmanagement.employee_service.service;
 
+import com.empmanagement.employee_service.advisor.EntityObjectNotFoundException;
 import com.empmanagement.employee_service.model.Address;
 import com.empmanagement.employee_service.repository.AddressRepo;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +23,14 @@ public class AddressService {
 
 
     public void addAddress(Address addr) {
-            repo.save(addr);
 
+            repo.save(addr);
     }
     public void updateAddress(Address addr) {
-
+        Address address=repo.findByZip(addr.getZip());
+        if(address==null){
+            throw new EntityObjectNotFoundException();
+        }
         repo.save(addr);
     }
 

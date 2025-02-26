@@ -1,5 +1,6 @@
 package com.empmanagement.employee_service.controller;
 
+import com.empmanagement.employee_service.advisor.EmptyInputException;
 import com.empmanagement.employee_service.model.Address;
 import com.empmanagement.employee_service.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +22,19 @@ public class AddressController {
 
     @PostMapping
     public void addAddress(@RequestBody Address addr) {
+        if(addr.getZip()==0 || addr.getCity()==null || addr.getState()==null){
+            throw new EmptyInputException();
+        }
+
 
         service.addAddress(addr);
     }
 
     @PutMapping
-    public void updateProduct(@RequestBody Address addr) {
-
+    public void updateAddress(@RequestBody Address addr) {
+        if(addr.getZip()==0){
+            throw new EmptyInputException();
+        }
         service.updateAddress(addr);
 
     }
