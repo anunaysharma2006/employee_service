@@ -11,27 +11,19 @@ public class EmployeeContoller {
 
     @Autowired
     EmployeeService service;
-
-//    @GetMapping("/employee")           //FOR SEEING ALL THE COMPANY
-//    public List<Employee> getEmployee(@RequestParam(required = false) String name){
-//        return  service.getProducts(name);
-//    }
-
-    @PostMapping           //FOR POSTING THE COMPANY
-    public void addProduct(@RequestBody Employee emp) {
-        service.addCompany(emp);
+    @PostMapping
+    public void addEmployee(@RequestBody Employee emp) {
+        service.addEmployee(emp);
     }
 
     @PutMapping
-    public void updateProduct(@RequestBody Employee emp) {
-
-        service.updateCompany(emp);
-
+    public void updateEmployee(@RequestBody Employee emp) {
+        service.updateEmployee(emp);
     }
 
     @DeleteMapping("/{employeeId}")
-    public void deleteProduct(@PathVariable int employeeId) {
-        service.deleteProduct(employeeId);
+    public void deleteEmployee(@PathVariable int employeeId) {
+        service.deleteEmployee(employeeId);
     }
 
     @GetMapping("/{employeeId}")

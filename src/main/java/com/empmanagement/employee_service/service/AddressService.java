@@ -13,7 +13,7 @@ public class AddressService {
     @Autowired
     AddressRepo repo;
 
-    public List<Address> getProducts(String name) {
+    public List<Address> getAddress() {
 
         List<Address> all = repo.findAll();
         return all;
@@ -24,12 +24,12 @@ public class AddressService {
             repo.save(addr);
 
     }
-    public void updateCompany(Address addr) {
+    public void updateAddress(Address addr) {
 
         repo.save(addr);
     }
 
-    public void deleteProduct(int Zip){
+    public void deleteAddress(int Zip){
         Address address = repo.findById(Zip).orElse(null);
         if(address!=null){
             repo.delete(address);

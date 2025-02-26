@@ -8,31 +8,32 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/address")
 public class AddressController {
 
     @Autowired
     AddressService service;
 
-    @GetMapping("/address")           //FOR SEEING ALL THE COMPANY
-    public List<Address> getProduct(@RequestParam(required = false) String name) {
-        return service.getProducts(name);
+    @GetMapping
+    public List<Address> getAddress() {
+        return service.getAddress();
     }
 
-    @PostMapping("/address")           //FOR POSTING THE COMPANY
+    @PostMapping
     public void addAddress(@RequestBody Address addr) {
 
         service.addAddress(addr);
     }
 
-    @PutMapping("/address")
+    @PutMapping
     public void updateProduct(@RequestBody Address addr) {
 
-        service.updateCompany(addr);
+        service.updateAddress(addr);
 
     }
 
-    @DeleteMapping("/address/{Zip}")
-    public void deleteProduct(@PathVariable int Zip) {
-        service.deleteProduct(Zip);
+    @DeleteMapping("{Zip}")
+    public void deleteAddress(@PathVariable int Zip) {
+        service.deleteAddress(Zip);
     }
 }

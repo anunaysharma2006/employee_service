@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/company")
 public class CompanyController {
 
     @Autowired
@@ -16,26 +17,24 @@ public class CompanyController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/company")           //FOR SEEING ALL THE COMPANY
-    public List<Company> getProduct(@RequestParam(required = false) String name) {
-        return service.getCompany(name);
+    @GetMapping
+    public List<Company> getCompany() {
+        return service.getCompany();
     }
 
-    @PostMapping("/company")           //FOR POSTING THE COMPANY
-    public void addProduct(@RequestBody Company comp) {
+    @PostMapping
+    public void addCompany(@RequestBody Company comp) {
         service.addCompany(comp);
     }
 
-    @PutMapping("/company")
-    public void updateProduct(@RequestBody Company comp) {
-
-        service.updateCompany(comp);
-
+    @PutMapping
+    public void updateCompany(@RequestBody Company company) {
+        service.updateCompany(company);
     }
 
-    @DeleteMapping("/product/{productId}")
-    public void deleteProduct(@PathVariable int CompanyId) {
-        service.deleteProduct(CompanyId);
+    @DeleteMapping("/{id}")
+    public void deleteCompany(@PathVariable int id) {
+        service.deleteCompany(id);
     }
 
 }

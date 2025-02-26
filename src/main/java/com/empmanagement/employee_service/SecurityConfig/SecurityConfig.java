@@ -11,6 +11,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,7 +33,10 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable()) // Disable CSRF
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/h2-console/**", "/auth/**").permitAll() // Public endpoints
+                        .requestMatchers("/h2-console/**", "/auth/**","/error").permitAll() // Public endpoints
+                        .requestMatchers("/company").hasRole("admin")
+                        .requestMatchers("/employee").hasRole("user")
+                        .requestMatchers("/address").hasAnyRole("user","admin")
                         .anyRequest().authenticated() // Secure other endpoints
                 )
                 .headers(headers -> headers.frameOptions(frame -> frame.disable())) // Allow H2 Console
@@ -59,5 +63,9 @@ public class SecurityConfig {
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
+    }
+    @Bean
+    GrantedAuthorityDefaults grantedAuthorityDefaults() {
+        return new GrantedAuthorityDefaults(""); // Removes "ROLE_" prefix
     }
 }

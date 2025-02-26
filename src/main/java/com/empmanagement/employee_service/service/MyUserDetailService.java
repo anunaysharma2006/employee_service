@@ -1,7 +1,7 @@
 package com.empmanagement.employee_service.service;
 
 import com.empmanagement.employee_service.model.AppUser;
-import com.empmanagement.employee_service.model.UserPrincipal;
+import com.empmanagement.employee_service.model.MyUserDetails;
 import com.empmanagement.employee_service.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +21,7 @@ public class MyUserDetailService implements UserDetailsService {
             System.out.println("User not found");
             throw new UsernameNotFoundException("User not found");
         }
-        return new UserPrincipal(users);
+        return new MyUserDetails(users);
     }
 
 }

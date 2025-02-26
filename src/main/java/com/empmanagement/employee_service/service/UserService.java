@@ -60,14 +60,5 @@ public class UserService {
         }
     }
 
-    @PostConstruct
-    void createTestUserInDB() {
-        AppUser user1 = new AppUser("test1", "test1", "test1", "user");
 
-        AppUser user3 = new AppUser("user1", "test2", "ROLE_USER", "user");
-
-        register(user1);
-
-        register(user3);
-    }
 }

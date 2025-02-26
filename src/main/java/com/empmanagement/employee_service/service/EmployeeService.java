@@ -18,16 +18,15 @@ public class EmployeeService {
         return all;
     }
 
-    public void addCompany(Employee emp) {
+    public void addEmployee(Employee emp) {
         repo.save(emp);
     }
 
-    public void updateCompany(Employee emp) {
-
+    public void updateEmployee(Employee emp) {
         repo.save(emp);
     }
 
-    public void deleteProduct(int employeeId) {
+    public void deleteEmployee(int employeeId) {
         Employee employee = repo.findById(employeeId).orElse(null);
         if (employee != null) {
             repo.delete(employee);
