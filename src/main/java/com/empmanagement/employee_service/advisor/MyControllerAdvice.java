@@ -18,4 +18,10 @@ public class MyControllerAdvice {
 
         return new ResponseEntity<String>("The data for the respective object is not found in the database", HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(DuplicateDataException.class)
+    public ResponseEntity<String> duplicateDataEntry(DuplicateDataException duplicateDataException) {
+
+        return new ResponseEntity<String>("Duplicate data is entered ,Please review your entries", HttpStatus.BAD_REQUEST);
+    }
 }
