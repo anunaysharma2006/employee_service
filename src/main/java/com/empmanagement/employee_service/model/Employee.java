@@ -2,8 +2,6 @@ package com.empmanagement.employee_service.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 
 @Entity
 @Data
@@ -15,9 +13,6 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String employeeAddress;
-
-
-
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
@@ -25,9 +20,10 @@ public class Employee {
     @JoinColumn(name = "address_zip")
     private Address address;
 
-    public Employee() {}
+    public Employee() {
+    }
 
-    public Employee(int employeeId, String firstName, String lastName, String employeeAddress, Company company,Address address) {
+    public Employee(int employeeId, String firstName, String lastName, String employeeAddress, Company company, Address address) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -75,6 +71,7 @@ public class Employee {
     public void setCompany(Company company) {
         this.company = company;
     }
+
     public Address getAddress() {
         return address;
     }

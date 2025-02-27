@@ -34,13 +34,14 @@ public class UserService {
         return repo.save(appUser);
     }
 
-    public void updateUser(AppUser appUser) {
-        repo.save(appUser);
+    public AppUser updateUser(AppUser appUser) {
+        return repo.save(appUser);
     }
 
-    public void deleteUser(Integer id) {
-        Optional<AppUser> appUser = repo.findById(id);
-        appUser.ifPresent(repo::delete);
+    public AppUser deleteUser(Integer id) {
+        AppUser appUser=repo.findById(id).orElse(null);
+        repo.delete(appUser);
+        return appUser;
     }
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);

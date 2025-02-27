@@ -1,5 +1,6 @@
 package com.empmanagement.employee_service.service;
 
+import com.empmanagement.employee_service.advisor.EntityObjectNotFoundException;
 import com.empmanagement.employee_service.model.Employee;
 import com.empmanagement.employee_service.repository.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,24 +19,27 @@ public class EmployeeService {
         return all;
     }
 
-    public void addEmployee(Employee emp) {
-        repo.save(emp);
+    public Employee addEmployee(Employee emp) {
+        return repo.save(emp);
     }
 
-    public void updateEmployee(Employee emp) {
-        repo.save(emp);
+    public Employee updateEmployee(Employee emp) {
+        return repo.save(emp);
     }
 
-    public void deleteEmployee(int employeeId) {
+    public Employee deleteEmployee(int employeeId) {
         Employee employee = repo.findById(employeeId).orElse(null);
         if (employee != null) {
             repo.delete(employee);
+            return employee;
+        }
+        else {
+            return employee;
         }
     }
 
     public Employee getEmployeeDetails(int employeeId) {
         Employee employee = repo.findById(employeeId).orElse(null);
         return employee;
-
     }
 }

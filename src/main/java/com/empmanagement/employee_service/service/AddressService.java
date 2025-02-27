@@ -21,38 +21,37 @@ public class AddressService {
     @Autowired
     AddressRepo repo;
 
-
-
     public List<Address> getAddress() {
-
         List<Address> all = repo.findAll();
         return all;
     }
 
-
-    public void addAddress(Address addr) {
-            Address address = repo.findByZip(addr.getZip());
-                if(address==null){
-                    repo.save(addr);
-                }else{
-                log.error("Duplicate object is inserted");
-                throw new DuplicateDataException();
-                }
-
-
+    public Address addAddress(Address addr) {
+        Address address = repo.findByZip(addr.getZip());
+        if (address == null) {
+            repo.save(addr);
+            return repo.save(addr);
+        } else {
+            log.error("Duplicate object is inserted");
+            throw new DuplicateDataException();
+        }
     }
-    public void updateAddress(Address addr) {
-        Address address=repo.findByZip(addr.getZip());
-        if(address==null){
+
+    public Address updateAddress(Address addr) {
+        Address address = repo.findByZip(addr.getZip());
+        if (address == null) {
             throw new EntityObjectNotFoundException();
         }
-        repo.save(addr);
+        return repo.save(addr);
     }
 
-    public void deleteAddress(int Zip){
+    public Address deleteAddress(int Zip) {
         Address address = repo.findById(Zip).orElse(null);
-        if(address!=null){
+        if (address != null) {
             repo.delete(address);
+            return address;
+        }else{
+            throw new EntityObjectNotFoundException();
         }
     }
 }

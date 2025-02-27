@@ -33,10 +33,10 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable()) // Disable CSRF
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/h2-console/**", "/auth/**","/error").permitAll() // Public endpoints
+                        .requestMatchers("/h2-console/**", "/auth/**", "/error").permitAll() // Public endpoints
                         .requestMatchers("/company").hasRole("admin")
                         .requestMatchers("/employee").hasRole("user")
-                        .requestMatchers("/address").hasAnyRole("user","admin")
+                        .requestMatchers("/address").hasAnyRole("user", "admin")
                         .anyRequest().authenticated() // Secure other endpoints
                 )
                 .headers(headers -> headers.frameOptions(frame -> frame.disable())) // Allow H2 Console
@@ -64,6 +64,7 @@ public class SecurityConfig {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
     }
+
     @Bean
     GrantedAuthorityDefaults grantedAuthorityDefaults() {
         return new GrantedAuthorityDefaults(""); // Removes "ROLE_" prefix

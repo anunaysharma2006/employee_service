@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 public class AppUser {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
@@ -21,7 +20,6 @@ public class AppUser {
     private String roles;
 
     public AppUser(String email, String username, String password, String roles) {
-
         this.email = email;
         this.username = username;
         this.password = password;
