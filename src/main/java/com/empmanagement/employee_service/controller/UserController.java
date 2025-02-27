@@ -3,6 +3,8 @@ package com.empmanagement.employee_service.controller;
 import com.empmanagement.employee_service.model.AppUser;
 import com.empmanagement.employee_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,13 +15,13 @@ public class UserController {
     UserService service;
 
     @PutMapping
-    public void updateUser(@RequestBody AppUser appUser){
-        service.updateUser(appUser);
-
+    public ResponseEntity<AppUser> updateUser(@RequestBody AppUser appUser) {
+        return new ResponseEntity<>(service.updateUser(appUser), HttpStatus.OK);
     }
+
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Integer id){
-        service.deleteUser(id);
+    public ResponseEntity<AppUser> deleteUser(@PathVariable Integer id) {
+        return new ResponseEntity<>(service.deleteUser(id), HttpStatus.OK);
     }
 
 }

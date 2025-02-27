@@ -11,11 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Address {
-
     @Id
     private int zip;
     private String state;
     private String city;
-
-
 }

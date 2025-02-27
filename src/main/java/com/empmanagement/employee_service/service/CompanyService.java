@@ -16,24 +16,24 @@ public class CompanyService {
     Companyrepo repo;
 
     public List<Company> getCompany() {
-
         List<Company> all = repo.findAll();
         return all;
     }
 
-    public void addCompany(Company comp) {
-        repo.save(comp);
+    public Company addCompany(Company comp) {
+        return repo.save(comp);
     }
 
-    public void updateCompany(Company company) {
+    public Company updateCompany(Company company) {
         Company existingCompany = repo.findById(company.getCompanyId()).orElse(null);
-        repo.save(existingCompany);
+        return repo.save(existingCompany);
     }
 
-    public void deleteCompany(int CompanyId) {
+    public Company deleteCompany(int CompanyId) {
         Company company = repo.findById(CompanyId).orElse(null);
         if (company != null) {
             repo.delete(company);
+            return company;
         }
     }
 }
