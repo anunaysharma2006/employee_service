@@ -1,7 +1,11 @@
 package com.empmanagement.employee_service.service;
 
+import com.empmanagement.employee_service.dto.DashboardEntityCount;
 import com.empmanagement.employee_service.dto.LoginRequest;
 import com.empmanagement.employee_service.model.AppUser;
+import com.empmanagement.employee_service.repository.AddressRepo;
+import com.empmanagement.employee_service.repository.Companyrepo;
+import com.empmanagement.employee_service.repository.EmployeeRepo;
 import com.empmanagement.employee_service.repository.UserRepo;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +25,16 @@ public class UserService {
     private UserRepo repo;
 
     @Autowired
+    Companyrepo companyrepo;
+
+    @Autowired
+    EmployeeRepo employeeRepo;
+
+    @Autowired
     private AuthenticationManager authManager;
+
+    @Autowired
+    AddressRepo addressRepo;
 
     @Autowired
     JWTService jwtService;
@@ -46,9 +59,10 @@ public class UserService {
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
-    public AppUser register(AppUser users) {
+    public String register(AppUser users) {
         users.setPassword(encoder.encode(users.getPassword()));
-        return repo.save(users);
+        repo.save(users);
+        return "success";
 
     }
 
@@ -62,4 +76,21 @@ public class UserService {
     }
 
 
+    public List<AppUser> getUsers() {
+        List<AppUser> all = repo.findAll();
+        return all;
+    }
+
+    public DashboardEntityCount getUserCounts() {
+        DashboardEntityCount count = new  DashboardEntityCount();
+        count.setUserCount(repo.count());
+        count.setCompanyCount(companyrepo.count());
+        count.setAddressCount(addressRepo.count());
+        count.setEmployeeCount(employeeRepo.count());
+
+        return count;
+
+
+
+    }
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://127.0.0.1:3000")
 @RestController
 @RequestMapping("/company")
 public class CompanyController {
@@ -38,5 +39,4 @@ public class CompanyController {
     public ResponseEntity<Company> deleteCompany(@PathVariable int id) {
         return new ResponseEntity<>(service.deleteCompany(id), HttpStatus.ACCEPTED);
     }
-
 }

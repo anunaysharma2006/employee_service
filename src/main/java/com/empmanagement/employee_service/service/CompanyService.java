@@ -26,7 +26,7 @@ public class CompanyService {
 
     public Company updateCompany(Company company) {
         Company existingCompany = repo.findById(company.getCompanyId()).orElse(null);
-        return repo.save(existingCompany);
+        return repo.save(company);
     }
 
     public Company deleteCompany(int CompanyId) {
@@ -35,5 +35,6 @@ public class CompanyService {
             repo.delete(company);
             return company;
         }
+        return company;
     }
 }
