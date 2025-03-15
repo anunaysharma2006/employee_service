@@ -1,14 +1,10 @@
 package com.empmanagement.employee_service.service;
 
-import com.empmanagement.employee_service.advisor.EntityObjectNotFoundException;
-import com.empmanagement.employee_service.dto.EmployeeDetails;
-import com.empmanagement.employee_service.model.Company;
 import com.empmanagement.employee_service.model.Employee;
 import com.empmanagement.employee_service.repository.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,8 +32,7 @@ public class EmployeeService {
         if (employee != null) {
             repo.delete(employee);
             return employee;
-        }
-        else {
+        } else {
             return employee;
         }
     }
@@ -48,7 +43,7 @@ public class EmployeeService {
     }
 
     public List<Employee> getEmployees() {
-        List<Employee> employees= repo.findAll();
+        List<Employee> employees = repo.findAll();
         return employees;
     }
 }
